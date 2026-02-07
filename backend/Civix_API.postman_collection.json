@@ -1,0 +1,162 @@
+{
+  "info": {
+    "name": "Civix API",
+    "description": "Complete API collection for Civix mobile app",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{base_url}}/users/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deviceId\": \"test_device_123\",\n  \"name\": \"Test User\",\n  \"phone\": \"+919876543210\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{base_url}}/users/me"
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": "{{base_url}}/users/me",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Get All Reports",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/reports?lat=23.0225&lng=72.5714&radius=5000"
+          }
+        },
+        {
+          "name": "Create Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": "{{base_url}}/reports",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 23.0225,\n  \"longitude\": 72.5714,\n  \"severity\": \"HIGH\",\n  \"depth\": \"KNEE\",\n  \"description\": \"Heavy waterlogging\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Vote Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": "{{base_url}}/reports/1234567890/vote",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vote\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify Report",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{base_url}}/reports/1234567890/verify"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Navigation",
+      "item": [
+        {
+          "name": "Get Route",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{base_url}}/routes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": {\"latitude\": 23.0225, \"longitude\": 72.5714},\n  \"destination\": {\"latitude\": 23.0335, \"longitude\": 72.5850},\n  \"mode\": \"driving\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Check Alerts",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{base_url}}/alerts/check",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 23.0225,\n  \"longitude\": 72.5714,\n  \"radius\": 500\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Upload & Search",
+      "item": [
+        {
+          "name": "Search Places",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/search?q=gota&lat=23.0225&lng=72.5714"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "item": [
+        {
+          "name": "Get Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/stats"
+          }
+        }
+      ]
+    }
+  ]
+}
